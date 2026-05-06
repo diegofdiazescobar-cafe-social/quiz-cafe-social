@@ -21,31 +21,220 @@
 <section class="hero"><div><span class="eyebrow">Quiz interactivo</span><h1>Encuentra tu <span>café ideal</span></h1><p class="lead">No necesitas saberlo todo sobre café especial. Responde 5 preguntas y te recomendamos una opción según tu gusto, tu método y tu nivel de intensidad.</p><div class="hero-actions"><a class="btn btn-primary" href="#quiz">Empezar ahora</a><a class="btn btn-gold" href="#ayuda">Que me asesoren</a></div></div><div class="visual"><div class="visual-inner"><div class="tag">Sin café maluco</div><h2>Una taza pensada para tu antojo real.</h2></div></div></section>
 <section class="section" id="quiz"><div class="quiz-card" id="box"><div class="progress-wrap"><div class="progress" id="progress"></div></div><p class="count" id="count">Pregunta 1 de 5</p><h2 class="question" id="question"></h2><div class="options" id="options"></div><div class="actions"><button class="btn" id="back" type="button">← Atrás</button><button class="btn btn-gold" id="restart" type="button">Reiniciar quiz</button></div></div>
 <div class="quiz-card result hidden" id="result"><span class="badge">Tu café ideal es</span><h2 class="result-title" id="resultTitle"></h2><p class="description" id="resultDescription"></p><div class="grid"><div class="mini"><strong>Perfil recomendado</strong><span id="profile"></span></div><div class="mini"><strong>Método sugerido</strong><span id="method"></span></div><div class="mini"><strong>Para quién es</strong><span id="user"></span></div></div><div class="result-actions"><a class="btn btn-primary" id="buy" href="#" target="_blank" rel="noopener">Ver café recomendado</a><a class="btn btn-whatsapp" id="whatsapp" href="#" target="_blank" rel="noopener">Pedir asesoría por WhatsApp</a><button class="btn" id="retry" type="button">Hacer el quiz otra vez</button></div><p class="note">Esta recomendación es una guía. Si quieres algo más preciso, escríbenos y te ayudamos a elegir según tu gusto, método y presupuesto.</p></div>
-<div class="below"><div class="below-card"><h3>Por sabor</h3><p>Frutal, floral, chocolatoso, experimental o clásico. La idea es que el café tenga sentido para ti.</p></div><div class="below-card"><h3>Por momento</h3><p>Para todos los días, para regalar, para descrestar o para consentirte con algo fuera de lo común.</p></div><div class="below-card" id="ayuda"><h3>Con ayuda humana</h3><p>Si el quiz no basta, te asesoramos por WhatsApp para elegir molienda, método y café.</p></div></div></section><footer>Café Social · Quiz de recomendación de café</footer></main>
+<div class="below"><div class="below-card"><h3>Por sabor</h3><p>Frutal, floral, chocolatoso, experimental o clásico. La idea es que el café tenga sentido para ti.</p></div><div class="below-card"><h3>Por momento</h3><p>Para todos los días, para regalar, para descrestar o para consentirte con algo fuera de lo común.</p></div><div class="below-card" id="ayuda"><h3>Con ayuda humana</h3><p>Si el quiz no basta, te asesoramos por WhatsApp para elegir molienda, método y café.</p></div></div></section><footer>Café Social · Quiz actualizado con todos los productos de la tienda</footer></main>
 <script>
 (function(){
-var WHATSAPP_NUMBER="573001234567";
-var productLinks={tradicional:"/productos/colombia/",frutal:"/productos/caturra-chiroso/",floral:"/productos/geisha/",exotico:"/productos/sl-28/",fermentado:"/productos/bourbon-sidra/",regalo:"/productos/starter-kit-x5/"};
+var WHATSAPP_NUMBER="573001465817";
+
+var products={
+  colombia_lavado:{
+    title:"Colombia - Lavado",
+    url:"https://cafesocial.mitiendanube.com/productos/colombia-lavado/",
+    description:"Tu match es un café confiable, versátil y perfecto para todos los días, pero con el twist de Café Social: notas de durazno, naranja y frutos amarillos.",
+    profile:"Durazno, naranja, frutos amarillos, acidez brillante y cuerpo equilibrado.",
+    method:"Cafetera tradicional, V60, prensa francesa, moka o espresso.",
+    user:"Para quienes quieren un café de diario, fácil de repetir y nada aburrido."
+  },
+  caturra_lavado:{
+    title:"Caturra - Lavado",
+    url:"https://cafesocial.mitiendanube.com/productos/caturra-lavado/",
+    description:"Un café limpio, amable y de perfil clásico-especial. Ideal si quieres un café rico, fácil y con personalidad sin irte a lo extremo.",
+    profile:"Perfil tradicional con expresión de origen, balance y tostión media.",
+    method:"Cafetera tradicional, prensa francesa, moka, V60 o filtrados.",
+    user:"Para quienes quieren un café confiable, pero más interesante que el café de siempre."
+  },
+  caturra_chiroso:{
+    title:"Caturra Chiroso - Natural",
+    url:"https://cafesocial.mitiendanube.com/productos/maragesha-lavado-zgctg/",
+    description:"Tu café ideal va por el lado jugoso, dulce y expresivo. Es perfecto si quieres salir del café plano y entrar en algo más especial sin sentir que necesitas un doctorado.",
+    profile:"Frutal, dulce, expresivo, con proceso natural y alta recordación en taza.",
+    method:"V60, Chemex, prensa francesa o filtrados.",
+    user:"Para quienes quieren algo diferente, rico y fácil de amar."
+  },
+  maragesha:{
+    title:"Maragesha - Lavado",
+    url:"https://cafesocial.mitiendanube.com/productos/maragesha/",
+    description:"Una rareza del café: cruce entre Gesha y Maragogipe. Elegante, complejo y poco común. Es para salirse de lo obvio.",
+    profile:"Limonaria, canela, té negro y cardamomo; lavado ThermalShock con fermentación.",
+    method:"V60, Origami, Chemex, filtrados o una preparación pausada.",
+    user:"Para quienes quieren un café especial, aromático y distinto sin irse a lo salvaje."
+  },
+  geisha_lavado:{
+    title:"Geisha - Lavado",
+    url:"https://cafesocial.mitiendanube.com/productos/geisha-lavado/",
+    description:"Lo tuyo es la elegancia en taza. Un café floral, delicado y memorable. Ese tipo de café que no se toma con afán: se toma con respeto.",
+    profile:"Florales, jazmín, limoncillo, acidez brillante y cuerpo equilibrado.",
+    method:"V60, Origami, Chemex o métodos filtrados.",
+    user:"Para quienes disfrutan cafés finos, aromáticos, limpios y especiales."
+  },
+  sl28:{
+    title:"SL28 - Natural",
+    url:"https://cafesocial.mitiendanube.com/productos/sl28/",
+    description:"Tu match es un café de competencia: intenso, exótico y con personalidad. No es para pasar desapercibido.",
+    profile:"Exótico, vibrante, expresivo y de alta complejidad.",
+    method:"V60, filtrados precisos o preparación lenta.",
+    user:"Para quienes buscan una experiencia wow."
+  },
+  bourbon_sidra:{
+    title:"Bourbon Sidra - Lavado",
+    url:"https://cafesocial.mitiendanube.com/productos/bourbon-sidra/",
+    description:"Un café experimental, con carácter y notas poco comunes. Ideal si quieres algo disruptivo, sensorial y con ese efecto de: esto no sabe a café normal.",
+    profile:"Experimental, aromático, expresivo y con proceso lavado especial.",
+    method:"Filtrados, prensa francesa o preparación fría.",
+    user:"Para quienes aman probar cosas raras, pero deliciosas."
+  },
+  bourbon_orange:{
+    title:"Bourbon Orange - Lavado",
+    url:"https://cafesocial.mitiendanube.com/productos/bourbon-orange/",
+    description:"Un café llamativo, brillante y con personalidad. Si quieres una taza con energía, dulzor y un punto cítrico, este puede ser tu match.",
+    profile:"Cítrico, dulce, expresivo y con carácter.",
+    method:"V60, Aeropress, Chemex o filtrados.",
+    user:"Para quienes buscan algo fresco, distinto y muy tomable."
+  },
+  bourbon_rosado:{
+    title:"Bourbon Rosado - Honey",
+    url:"https://cafesocial.mitiendanube.com/productos/bourbon-rosado-honey/",
+    description:"Un café dulce, seductor y con proceso honey. Es perfecto para quienes quieren algo especial, suave y con mucha personalidad.",
+    profile:"Honey, dulce, frutal y de cuerpo amable.",
+    method:"V60, prensa francesa, Chemex o filtrados.",
+    user:"Para quienes quieren un café especial, dulce y balanceado."
+  },
+  ombligon_honey:{
+    title:"Ombligón - Honey",
+    url:"https://cafesocial.mitiendanube.com/productos/ombligon-honey/",
+    description:"Un café revoltoso, jugoso y con notas de ciruela, uchuva y caramelo. Para quienes quieren algo diferente sin perder dulzor.",
+    profile:"Ciruela, uchuva, caramelo, proceso honey y fermentación de 48 horas.",
+    method:"V60, prensa francesa, Chemex o métodos de filtro.",
+    user:"Para quienes quieren fruta, dulzor y una taza con actitud."
+  },
+  ombligon_natural:{
+    title:"Ombligón - Natural",
+    url:"https://cafesocial.mitiendanube.com/productos/ombligon-natural/",
+    description:"Un café con carácter, proceso natural y una experiencia más intensa. Ideal si quieres una taza menos obvia y más memorable.",
+    profile:"Proceso natural, notas dulces y perfil expresivo.",
+    method:"Filtrados, prensa francesa o preparación fría.",
+    user:"Para quienes quieren un café más atrevido y sensorial."
+  },
+  tabi:{
+    title:"Tabi Agua de Rosas - Lavado",
+    url:"https://cafesocial.mitiendanube.com/productos/tabi/",
+    description:"Un café floral, delicado y especial, con ese gesto inesperado del agua de rosas. Es una taza para regalarse una pausa bonita.",
+    profile:"Floral, aromático, delicado y con perfil elegante.",
+    method:"V60, Origami, Chemex o filtrados suaves.",
+    user:"Para quienes buscan una taza distinta, aromática y con encanto."
+  },
+  kit_variedades:{
+    title:"Kit 3 variedades - para regalo",
+    url:"https://cafesocial.mitiendanube.com/productos/kit-variedades/",
+    description:"Tu mejor opción es el kit. Porque regalar café no debería ser regalar cualquier bolsa: debería sentirse pensado, bonito y especial.",
+    profile:"Incluye una selección de café Colección, Reserva y Casa, elegida por el barista.",
+    method:"Ideal para varias preparaciones y niveles de experiencia.",
+    user:"Para regalar, explorar o iniciar a alguien en café especial."
+  }
+};
+
 var questions=[
-{text:"Cuando piensas en un buen café, ¿qué estás buscando?",options:[{title:"Algo rico para todos los días",desc:"Buen sabor, cero complicación.",scores:{tradicional:3,frutal:1}},{title:"Algo diferente, pero no rarísimo",desc:"Que se sienta especial sin ser intimidante.",scores:{frutal:3,floral:1,fermentado:1}},{title:"Una experiencia wow",desc:"Quiero probar algo que no sepa a café común.",scores:{exotico:3,floral:2,fermentado:1}},{title:"Un regalo que se vea top",desc:"Quiero sorprender a alguien.",scores:{regalo:4,floral:1,exotico:1}}]},
-{text:"¿Qué sabores te llaman más?",options:[{title:"Chocolate, panela, caramelo",desc:"Clásico, amable y fácil de tomar.",scores:{tradicional:4}},{title:"Frutas maduras",desc:"Jugoso, dulce y expresivo.",scores:{frutal:4,fermentado:1}},{title:"Flores, té, miel",desc:"Delicado, elegante y aromático.",scores:{floral:4,exotico:1}},{title:"Notas intensas y raras",desc:"Fermentos, licores, frutas exóticas.",scores:{fermentado:4,exotico:2}}]},
-{text:"¿Qué tan aventurero/a eres con el café?",options:[{title:"Voy a la fija",desc:"Prefiero algo seguro y balanceado.",scores:{tradicional:4}},{title:"Me gusta probar, pero con calma",desc:"Algo diferente sin perder equilibrio.",scores:{frutal:3,floral:1}},{title:"Sorpréndanme",desc:"Quiero algo que se sienta especial.",scores:{exotico:3,fermentado:2}},{title:"Estoy comprando para alguien más",desc:"Necesito una opción bonita y acertada.",scores:{regalo:4}}]},
-{text:"¿Cómo preparas tu café normalmente?",options:[{title:"Cafetera tradicional o prensa",desc:"Busco algo rendidor y fácil.",scores:{tradicional:3,frutal:1}},{title:"V60, Chemex o métodos filtrados",desc:"Me gusta notar matices.",scores:{frutal:2,floral:3,exotico:1}},{title:"Espresso o moka",desc:"Quiero cuerpo e intensidad.",scores:{tradicional:2,fermentado:2,frutal:1}},{title:"No sé / es para regalo",desc:"Necesito que me orienten.",scores:{regalo:3,tradicional:1}}]},
-{text:"¿Para qué momento lo quieres?",options:[{title:"Para tomar todos los días",desc:"Que sea delicioso y fácil de repetir.",scores:{tradicional:4}},{title:"Para consentirme",desc:"Algo más especial que mi café normal.",scores:{frutal:2,floral:2,exotico:1}},{title:"Para descrestar",desc:"Quiero que alguien diga: ¿qué café es este?",scores:{exotico:3,fermentado:3}},{title:"Para regalar",desc:"Quiero quedar muy bien.",scores:{regalo:5}}]}];
-var results={
-tradicional:{title:"Colombia Tradicional",description:"Tu match es un café confiable, balanceado y delicioso para todos los días. No necesita hacerse el raro para ser bueno: funciona en la mañana, después de almuerzo y cuando la vida pide pausa.",profile:"Chocolate, panela, caramelo, cuerpo medio y acidez amable.",method:"Prensa francesa, cafetera tradicional, moka o espresso.",user:"Para quienes quieren buen café sin complicarse.",link:productLinks.tradicional},
-frutal:{title:"Caturra Chiroso",description:"Tu café ideal va por el lado jugoso, dulce y expresivo. Es perfecto si quieres salir del café plano y entrar en algo más especial, sin sentir que necesitas un doctorado para disfrutarlo.",profile:"Frutas maduras, dulzor alto, acidez brillante y taza limpia.",method:"V60, Chemex, prensa francesa o filtrados.",user:"Para quienes quieren algo diferente, rico y fácil de amar.",link:productLinks.frutal},
-floral:{title:"Geisha",description:"Lo tuyo es la elegancia en taza. Te recomendamos un café delicado, aromático y memorable. Ese tipo de café que no se toma con afán, se toma con respeto.",profile:"Floral, tipo té, miel, frutas suaves y alta complejidad.",method:"V60, Origami, Chemex o métodos filtrados.",user:"Para quienes disfrutan cafés delicados, limpios y especiales.",link:productLinks.floral},
-exotico:{title:"SL-28",description:"Tu match es un café de competencia: intenso, exótico y con personalidad. Es para quienes quieren una taza que cuente historia desde el primer sorbo.",profile:"Frutas exóticas, acidez vibrante, alta expresión y complejidad.",method:"V60, filtrados precisos o preparación lenta.",user:"Para quienes buscan una experiencia wow.",link:productLinks.exotico},
-fermentado:{title:"Bourbon Sidra",description:"Te recomendamos un café experimental, con carácter y notas poco comunes. Ideal si quieres algo disruptivo, sensorial y con ese efecto de: esto no sabe a café normal.",profile:"Fermentación marcada, frutas intensas, licoroso y aromático.",method:"Filtrados, prensa francesa o preparación fría.",user:"Para quienes aman probar cosas raras, pero deliciosas.",link:productLinks.fermentado},
-regalo:{title:"Starter Kit Café Social",description:"Tu mejor opción es un kit. Porque regalar café no debería ser regalar cualquier bolsa: debería sentirse pensado, bonito y especial.",profile:"Selección variada de cafés para descubrir distintos perfiles.",method:"Ideal para diferentes métodos y niveles de experiencia.",user:"Para regalar, iniciar a alguien en café especial o descrestar.",link:productLinks.regalo}};
-var current=0,scores={tradicional:0,frutal:0,floral:0,exotico:0,fermentado:0,regalo:0},history=[];
+{text:"Cuando piensas en un buen café, ¿qué estás buscando?",options:[
+{title:"Algo rico para todos los días",desc:"Buen sabor, cero complicación.",scores:{colombia_lavado:4,caturra_lavado:3,caturra_chiroso:1}},
+{title:"Algo diferente, pero no rarísimo",desc:"Que se sienta especial sin ser intimidante.",scores:{caturra_chiroso:4,maragesha:3,bourbon_rosado:2,ombligon_honey:2}},
+{title:"Una experiencia wow",desc:"Quiero probar algo que no sepa a café común.",scores:{sl28:4,geisha_lavado:3,bourbon_sidra:3,maragesha:2}},
+{title:"Un regalo que se vea top",desc:"Quiero sorprender a alguien.",scores:{kit_variedades:6,geisha_lavado:2,tabi:2,maragesha:1}}
+]},
+{text:"¿Qué sabores te llaman más?",options:[
+{title:"Chocolate, panela, caramelo",desc:"Clásico, amable y fácil de tomar.",scores:{colombia_lavado:3,caturra_lavado:4,ombligon_honey:2}},
+{title:"Frutas amarillas o maduras",desc:"Jugoso, dulce y expresivo.",scores:{colombia_lavado:2,caturra_chiroso:4,bourbon_rosado:2,ombligon_honey:3}},
+{title:"Flores, té, jazmín o rosas",desc:"Delicado, elegante y aromático.",scores:{geisha_lavado:5,tabi:4,maragesha:3}},
+{title:"Notas intensas, raras o experimentales",desc:"Fermentos, cítricos, frutas exóticas.",scores:{bourbon_sidra:4,sl28:4,bourbon_orange:3,ombligon_natural:3}}
+]},
+{text:"¿Qué tan aventurero/a eres con el café?",options:[
+{title:"Voy a la fija",desc:"Prefiero algo seguro y balanceado.",scores:{colombia_lavado:4,caturra_lavado:4}},
+{title:"Me gusta probar, pero con calma",desc:"Algo diferente sin perder equilibrio.",scores:{caturra_chiroso:3,maragesha:3,bourbon_rosado:2,ombligon_honey:2}},
+{title:"Sorpréndanme",desc:"Quiero algo que se sienta especial.",scores:{sl28:3,bourbon_sidra:4,bourbon_orange:3,ombligon_natural:3}},
+{title:"Estoy comprando para alguien más",desc:"Necesito una opción bonita y acertada.",scores:{kit_variedades:5,tabi:2,geisha_lavado:2}}
+]},
+{text:"¿Cómo preparas tu café normalmente?",options:[
+{title:"Cafetera tradicional o prensa",desc:"Busco algo rendidor y fácil.",scores:{colombia_lavado:3,caturra_lavado:3,ombligon_honey:1}},
+{title:"V60, Chemex o métodos filtrados",desc:"Me gusta notar matices.",scores:{geisha_lavado:3,maragesha:3,tabi:3,caturra_chiroso:2,sl28:2}},
+{title:"Espresso o moka",desc:"Quiero cuerpo e intensidad.",scores:{colombia_lavado:2,caturra_lavado:3,bourbon_sidra:2,bourbon_orange:2}},
+{title:"No sé / es para regalo",desc:"Necesito que me orienten.",scores:{kit_variedades:4,colombia_lavado:1}}
+]},
+{text:"¿Para qué momento lo quieres?",options:[
+{title:"Para tomar todos los días",desc:"Que sea delicioso y fácil de repetir.",scores:{colombia_lavado:5,caturra_lavado:4,caturra_chiroso:1}},
+{title:"Para consentirme",desc:"Algo más especial que mi café normal.",scores:{maragesha:3,geisha_lavado:3,tabi:3,bourbon_rosado:2}},
+{title:"Para descrestar",desc:"Quiero que alguien diga: ¿qué café es este?",scores:{sl28:4,bourbon_sidra:4,bourbon_orange:3,ombligon_natural:3}},
+{title:"Para regalar",desc:"Quiero quedar muy bien.",scores:{kit_variedades:6,geisha_lavado:2,tabi:2}}
+]}];
+
+var current=0;
+var scores={};
+Object.keys(products).forEach(function(k){scores[k]=0});
+var history=[];
 var box=document.getElementById("box"),resultBox=document.getElementById("result"),question=document.getElementById("question"),count=document.getElementById("count"),optionsBox=document.getElementById("options"),progress=document.getElementById("progress"),back=document.getElementById("back"),restart=document.getElementById("restart"),retry=document.getElementById("retry");
-function render(){var q=questions[current];question.textContent=q.text;count.textContent="Pregunta "+(current+1)+" de "+questions.length;progress.style.width=(((current+1)/questions.length)*100)+"%";optionsBox.innerHTML="";q.options.forEach(function(o){var b=document.createElement("button");b.type="button";b.className="option";b.innerHTML="<strong>"+o.title+"</strong><span>"+o.desc+"</span>";b.addEventListener("click",function(){history.push({scores:o.scores});Object.keys(o.scores).forEach(function(k){scores[k]+=o.scores[k]});if(current<questions.length-1){current++;render()}else{show()}});optionsBox.appendChild(b)});back.style.visibility=current===0?"hidden":"visible"}
-function top(){var key="tradicional",score=-1;Object.keys(scores).forEach(function(k){if(scores[k]>score){score=scores[k];key=k}});return key}
-function show(){var r=results[top()];document.getElementById("resultTitle").textContent=r.title;document.getElementById("resultDescription").textContent=r.description;document.getElementById("profile").textContent=r.profile;document.getElementById("method").textContent=r.method;document.getElementById("user").textContent=r.user;document.getElementById("buy").href=r.link;var text=encodeURIComponent("Hola, hice el quiz de Café Social y mi resultado fue: "+r.title+". ¿Me ayudan a elegirlo o a comprarlo?");document.getElementById("whatsapp").href="https://wa.me/"+WHATSAPP_NUMBER+"?text="+text;box.classList.add("hidden");resultBox.classList.remove("hidden");resultBox.scrollIntoView({behavior:"smooth",block:"start"})}
-function reset(){current=0;scores={tradicional:0,frutal:0,floral:0,exotico:0,fermentado:0,regalo:0};history=[];resultBox.classList.add("hidden");box.classList.remove("hidden");render();box.scrollIntoView({behavior:"smooth",block:"start"})}
-back.addEventListener("click",function(){if(!history.length||current===0)return;var last=history.pop();Object.keys(last.scores).forEach(function(k){scores[k]-=last.scores[k]});current--;render()});restart.addEventListener("click",reset);retry.addEventListener("click",reset);render();
+
+function render(){
+  var q=questions[current];
+  question.textContent=q.text;
+  count.textContent="Pregunta "+(current+1)+" de "+questions.length;
+  progress.style.width=(((current+1)/questions.length)*100)+"%";
+  optionsBox.innerHTML="";
+  q.options.forEach(function(o){
+    var b=document.createElement("button");
+    b.type="button";
+    b.className="option";
+    b.innerHTML="<strong>"+o.title+"</strong><span>"+o.desc+"</span>";
+    b.addEventListener("click",function(){
+      history.push({scores:o.scores});
+      Object.keys(o.scores).forEach(function(k){scores[k]+=o.scores[k]});
+      if(current<questions.length-1){current++;render()}else{show()}
+    });
+    optionsBox.appendChild(b)
+  });
+  back.style.visibility=current===0?"hidden":"visible"
+}
+
+function top(){
+  var key="colombia_lavado",score=-1;
+  Object.keys(scores).forEach(function(k){
+    if(scores[k]>score){score=scores[k];key=k}
+  });
+  return key
+}
+
+function show(){
+  var r=products[top()];
+  document.getElementById("resultTitle").textContent=r.title;
+  document.getElementById("resultDescription").textContent=r.description;
+  document.getElementById("profile").textContent=r.profile;
+  document.getElementById("method").textContent=r.method;
+  document.getElementById("user").textContent=r.user;
+  document.getElementById("buy").href=r.url;
+  var text=encodeURIComponent("Hola, hice el quiz de Café Social y mi resultado fue: "+r.title+". ¿Me ayudan a elegirlo o a comprarlo?");
+  document.getElementById("whatsapp").href="https://wa.me/"+WHATSAPP_NUMBER+"?text="+text;
+  box.classList.add("hidden");
+  resultBox.classList.remove("hidden");
+  resultBox.scrollIntoView({behavior:"smooth",block:"start"})
+}
+
+function reset(){
+  current=0;
+  Object.keys(scores).forEach(function(k){scores[k]=0});
+  history=[];
+  resultBox.classList.add("hidden");
+  box.classList.remove("hidden");
+  render();
+  box.scrollIntoView({behavior:"smooth",block:"start"})
+}
+
+back.addEventListener("click",function(){
+  if(!history.length||current===0)return;
+  var last=history.pop();
+  Object.keys(last.scores).forEach(function(k){scores[k]-=last.scores[k]});
+  current--;
+  render()
+});
+restart.addEventListener("click",reset);
+retry.addEventListener("click",reset);
+render();
 })();
 </script>
 </body>
